@@ -1,0 +1,17 @@
+.meat {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 70%;
+  }
+
+  .poster {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20%;
+  }
+}

@@ -9,7 +9,7 @@ export default class SearchContent extends React.Component {
         super(props);
         this.state = {
             title: props.title ? props.title : '',
-            isFetching: false,
+            loading: false,
             movies_found: []
         }
     }
@@ -25,15 +25,15 @@ export default class SearchContent extends React.Component {
     }
 
     async fetchMovieContent() {
-        this.setState({...this.state, isFetching: true});
+        this.setState({...this.state, loading: true});
 
         // try {
-        //     this.setState({...this.state, isFetching: true});
+        //     this.setState({...this.state, loading: true});
         //     const response = await axios.get("USER_SERVICE_URL");
-        //     this.setState({movies_found: response.data, isFetching: false});
+        //     this.setState({movies_found: response.data, loading: false});
         // } catch (e) {
         //     console.log(e);
-        //     this.setState({...this.state, isFetching: false});
+        //     this.setState({...this.state, loading: false});
         // }
 
         setTimeout(() => {
@@ -44,19 +44,19 @@ export default class SearchContent extends React.Component {
                     {id: 2, title: 'Some movie 2'},
                     {id: 3, title: 'Some movie 3'},
                 ],
-                isFetching: false
+                loading: false
             })
         }, 1000);
     }
 
     render() {
-        let {isFetching, movies_found} = this.state;
+        let {loading, movies_found} = this.state;
         let displayTitle = this.state.title ? this.state.title : '';
         if (!displayTitle) displayTitle = new URLSearchParams(window.location.search).get('title');
 
         return <div className={"search-wrapper"}>
             <h1>Showing information about {displayTitle}</h1>
-            {isFetching ? <Loading/> : <div className={"search-content"}>
+            {loading ? <Loading/> : <div className={"search-content"}>
                 {!!movies_found.length
                     ? <p>Found these entries for your search:</p>
                     : <p>No entries found for your search!</p>
