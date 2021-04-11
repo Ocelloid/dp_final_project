@@ -1,0 +1,24 @@
+.about-unit {
+  display: flex;
+  flex-direction: row;
+  padding: 25px 0;
+
+  .about-picture-wrapper {
+    display: flex;
+    flex-basis: 15%;
+    flex-grow: 0;
+
+    img {
+      width: 100%;
+      border-radius: 500px;
+    }
+  }
+
+  .about-profile {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 85%;
+    padding: 0 25px;
+  }
+}
