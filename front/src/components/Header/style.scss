@@ -1,0 +1,73 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+}
+
+.logo {
+  background-image: url("../../assets/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 160px;
+  height: 80px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.title {
+  margin: 0 10px;
+}
+
+.searchbar {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  form {
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+    input {
+      background: aliceblue;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+      font-size: 2em;
+      padding: 0 10px;
+
+      &:focus {
+        background: white;
+        outline: none;
+      }
+    }
+
+    button {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      top: 10px;
+      margin-left: -60px;
+      background: transparent;
+      background-image: url("../../assets/search.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: none;
+      opacity: 0.3;
+
+      &:active {
+        outline: none;
+        opacity: 1;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
