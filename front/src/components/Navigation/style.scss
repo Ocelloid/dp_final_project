@@ -1,0 +1,21 @@
+.navigation {
+  padding: 15px 10px;
+}
+
+.navigation-link {
+  a {
+    color: rgba(31,31,31,0.9);
+    text-decoration: none;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px 15px;
+    font-size: 18px;
+    border-radius: 3px;
+    display: flex;
+
+    &:hover {
+      color: #f60;
+    }
+  }
+
+}
