@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from "../Loading";
+import Loading from "../Utils/Loading";
 import "./style.scss";
 import {Link} from "react-router-dom";
 import axios from 'axios';

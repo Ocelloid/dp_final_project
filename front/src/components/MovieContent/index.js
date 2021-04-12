@@ -1,6 +1,6 @@
 import React from 'react';
 import "./style.scss";
-import Loading from "../Loading";
+import Loading from "../Utils/Loading";
 
 export default class MovieContent extends React.Component {
     constructor(props) {
