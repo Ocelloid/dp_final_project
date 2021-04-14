@@ -8,8 +8,9 @@ import pymysql
 
 endpoint = 'aws-project.cth6m6izvneu.us-east-1.rds.amazonaws.com'
 username = 'admin'
-password = ''
+password = 'Killzone3'
 db_name = 'movie_db'
+movieID = 'POST_REQ' 
 
 connection = pymysql.connect(endpoint,user=username,passwd=password, db=db_name)
 
@@ -18,13 +19,11 @@ def lambda_handler(event, context):
     cursor = connection.cursor()
     cursor.execute('SELECT * from movie_dump')
     rows = cursor.fetchall()
-    for row in rows:
-        #print("{0},{1},{2},{3},{4},{5},{6},{7},{8}".format(row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[0]))
-        y = json.dumps(row)
-        print(y)
+    return{
+        'statusCode': 200,
+        'body': json.dumps(rows)
+    }
         
-    movieID= 'POST_REQ'        
-
 # get specific data from the server
 def get_searchData(event, context):
     cursor = connection.cursor()
