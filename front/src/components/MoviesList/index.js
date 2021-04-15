@@ -3,6 +3,7 @@ import "./style.scss";
 import axios from "axios";
 import {API_BASE} from "../../consts";
 import Loading from "../Utils/Loading";
+import {Link} from "react-router-dom";
 
 export default class MoviesList extends React.Component {
     constructor(props) {
@@ -80,14 +81,19 @@ export default class MoviesList extends React.Component {
 export class MoviesListItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            movie: props.movie
-        }
+        console.log(props.movie);
     }
 
     render() {
-        return <div className={"list-item"}>
-
-        </div>
+        let {movie} = this.props;
+        return <Link className={"list-item"} to={"/movie/" + movie.id}>
+            <div className={"poster"}>
+                <img src={movie.poster_link}/>
+            </div>
+            <div className={"content"}>
+                <span className={"item-title"}>{movie.series_title}</span>
+                <span className={"item-desc"}>{movie.description}</span>
+            </div>
+        </Link>
     }
 }

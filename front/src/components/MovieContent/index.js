@@ -83,6 +83,9 @@ export default class MovieContent extends React.Component {
                             <br/>
                             <span className={"dsc_title"}>Description:</span>
                             <span className={"dsc_value"}>{movie_content.description}</span>
+                            <br/>
+                            <span className={"dsc_title"}>Score:</span>
+                            <span className={"dsc_value"}>Meta {movie_content.meta_score}, iMDB {movie_content.IMDB_Rating}</span>
                         </div>
                         <div className={"poster"}>
                             <img src={movie_content.poster_link}/>
