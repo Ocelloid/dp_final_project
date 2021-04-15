@@ -42,5 +42,6 @@
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
     "webpack": "4.44.2"
-  }
+  },
+  "proxy": "https://liczdmjvcg.execute-api.us-east-1.amazonaws.com/default/"
 }

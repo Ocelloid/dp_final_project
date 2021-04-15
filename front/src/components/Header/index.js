@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import "./style.scss";
 
 export default class Header extends React.Component {
@@ -13,7 +14,7 @@ export default class Header extends React.Component {
         let {search_name} = this.state;
 
         return <div className={"header"}>
-            <div className={"logo"}/>
+            <Link className={"logo"} to="/"/>
             <div className={"searchbar"}>
                 <form action="/search" method="get">
                     <input

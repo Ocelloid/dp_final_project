@@ -21,7 +21,6 @@ export default class Navigation extends React.Component {
 
     handleScroll(that) {
         const offset = window.scrollY;
-        console.log(offset);
         if (offset > 80) {
             that.setState({...that.state, scrolled: true});
         }
