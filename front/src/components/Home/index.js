@@ -15,7 +15,7 @@ export default class Home extends React.Component {
             genrePercent: [],
             metaRating: [],
             grossScore: [],
-            scoreGrossTotal: [],
+            scoreGrossTitle: [],
             scoreGrossGenre: []
         }
     }
@@ -28,7 +28,7 @@ export default class Home extends React.Component {
         try {
             const response = await axios.get("https://91h6x732qg.execute-api.us-east-1.amazonaws.com/default/rating");
             let state = this.state;
-            state["metaRating"] = eval(response.data);
+            state["metaRating"] = eval(response.data['year&meta']).filter(x => x[0] != 0);
             this.setState({state});
         } catch (e) {
             console.log(e);
@@ -52,7 +52,24 @@ export default class Home extends React.Component {
         try {
             const response = await axios.get("https://9x3hqi0yl9.execute-api.us-east-1.amazonaws.com/default/grossScore");
             let state = this.state;
-            state["grossScore"] = eval(response.data["score and gross income"]);
+            state["grossScore"] = eval(response.data["score and gross income"]).filter(x => x[0] !== 0);
+            this.setState({state});
+        } catch (e) {
+            console.log(e);
+        }
+        try {
+            const response = await axios.get("https://exbtrf0vi2.execute-api.us-east-1.amazonaws.com/default/grossGenre");
+            let state = this.state;
+            state["scoreGrossGenre"] = eval(response.data["genre-avg-count"]).map(x => [x[0].slice(0,3), x[1]/1, x[2]/1, x[0], x[3]]);
+            this.setState({state});
+        } catch (e) {
+            console.log(e);
+        }
+        try {
+            const response = await axios.get("https://429os5ap9f.execute-api.us-east-1.amazonaws.com/default/allmoviesChart");
+            let state = this.state;
+            state["scoreGrossTitle"] = eval(response.data["title-gross-score"]).map(x => [x[1], x[2]]).filter(x => x[1] !== 0);
+            state["scoreGrossTitle"].shift();
             this.setState({state});
         } catch (e) {
             console.log(e);
@@ -60,7 +77,7 @@ export default class Home extends React.Component {
     }
 
     render() {
-        let {yearPercent, genrePercent, grossScore, metaRating, scoreGrossTotal, scoreGrossGenre} = this.state;
+        let {yearPercent, genrePercent, grossScore, metaRating, scoreGrossTitle, scoreGrossGenre} = this.state;
 
         return <div className={"home"}>
             <h1>Welcome to the XYZ Movie Theater database!</h1>
@@ -69,16 +86,14 @@ export default class Home extends React.Component {
             </div>
             <Row>
                 <ChartWrapper>
-                    {metaRating.length === 0 ? <Loading/> :
+                    {yearPercent.length === 0 ? <Loading/> :
                         <Chart
-                            chartType="AreaChart"
-                            data={[['Metascore', 'IMDB rating'], ...metaRating]}
+                            chartType="PieChart"
+                            data={[['Year', 'Total of movies'], ...(yearPercent.map(x => [x[0].toString(), x[1]]))]}
                             options={{
-                                title: 'Average rating by year',
-                                hAxis: {title: 'Year', titleTextStyle: {color: '#333'}},
-                                vAxis: {minValue: 0},
+                                title: 'Movies released by the year',
                             }}
-                            rootProps={{'data-testid': '1'}}
+                            rootProps={{ 'data-testid': '1' }}
                         />
                     }
                 </ChartWrapper>
@@ -103,27 +118,28 @@ export default class Home extends React.Component {
                             data={[['Score', 'Gross'], ...grossScore]}
                             options={{
                                 title: 'Score vs. Gross comparison',
-                                hAxis: {title: 'Score', minValue: 0, maxValue: 10},
-                                vAxis: {title: 'Gross', minValue: 0, maxValue: 100},
-                                trendlines: {0: {}},
+                                hAxis: {title: 'Score'},
+                                vAxis: {title: 'Gross'},
                                 legend: 'none',
                             }}
                             rootProps={{'data-testid': '1'}}
                         />
                     }
                 </ChartWrapper>
+            </Row>
+            <Row>
                 <ChartWrapper>
-                    {scoreGrossTotal.length === 0 ? <Loading/> :
+                    {scoreGrossTitle.length === 0 ? <Loading/> :
                         <Chart
                             chartType="Scatter"
-                            data={scoreGrossTotal}
+                            data={[['Gross', 'Score'], ...scoreGrossTitle]}
                             options={{
                                 // Material design options
                                 chart: {
                                     title: "Movies' Final Gross",
-                                    subtitle: 'based on investment',
+                                    subtitle: 'compared to score',
                                 },
-                                hAxis: {title: 'Investment'},
+                                hAxis: {title: 'Score'},
                                 vAxis: {title: 'Gross'},
                             }}
                             rootProps={{'data-testid': '3'}}
@@ -133,14 +149,17 @@ export default class Home extends React.Component {
             </Row>
             <Row>
                 <ChartWrapper>
-                    {yearPercent.length === 0 ? <Loading/> :
+                    {metaRating.length === 0 ? <Loading/> :
                         <Chart
-                            chartType="PieChart"
-                            data={[['Year', 'Total of movies'], ...(yearPercent.map(x => [x[0].toString(), x[1]]))]}
+                            chartType="LineChart"
+                            data={[['Year', 'Metascore'], ...metaRating]}
                             options={{
-                                title: 'Movies released by the year',
+                                title: 'Average score by year',
+                                hAxis: {title: 'Year', titleTextStyle: {color: '#333'}},
+                                trendlines: {0: {}},
+                                vAxis: {minValue: 0},
                             }}
-                            rootProps={{ 'data-testid': '1' }}
+                            rootProps={{'data-testid': '1'}}
                         />
                     }
                 </ChartWrapper>
@@ -149,13 +168,13 @@ export default class Home extends React.Component {
                         <Chart
                             chartType="BubbleChart"
                             loader={<div>Loading Chart</div>}
-                            data={scoreGrossGenre}
+                            data={[['ID', 'Avg. Gross', 'Avg. Score', 'Genre', 'Amount of movies'], ...scoreGrossGenre]}
                             options={{
                                 title:
-                                    'Correlation between average gross, investment ' +
+                                    'Correlation between average gross, score ' +
                                     'and amount of movies belonging to different genres',
                                 hAxis: {title: 'Avg. Gross'},
-                                vAxis: {title: 'Avg. Investment'},
+                                vAxis: {title: 'Avg. Score'},
                                 bubble: {textStyle: {fontSize: 11}},
                             }}
                             rootProps={{'data-testid': '1'}}
