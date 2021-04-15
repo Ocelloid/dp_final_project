@@ -1,6 +1,9 @@
 .navigation {
   padding: 15px 10px;
   min-width: 250px;
+  position: fixed;
+  left: 100px;
+  top: 80;
 }
 
 .navigation-link {
@@ -18,11 +21,4 @@
       color: #f60;
     }
   }
-
-}
-
-.scrolled {
-  position: fixed;
-  left: 100px;
-  top: 0;
 }
