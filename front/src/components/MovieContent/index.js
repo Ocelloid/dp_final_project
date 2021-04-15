@@ -38,33 +38,30 @@ export default class MovieContent extends React.Component {
         try {
             this.setState({...this.state, isFetching: true});
             const response = await axios.post("https://7m0xmfs9v4.execute-api.us-east-1.amazonaws.com/default/movieByID", {id});
-            this.setState({movie_content: response.data, isFetching: false});
-        } catch (e) {
-            console.log(e);
-            this.setState({...this.state, isFetching: false});
-        }
-
-        setTimeout(() => {
+            const movie = eval(response.data.movie)[0];
+            console.log(movie);
             this.setState({
-                ...this.state,
                 movie_content: {
-                    id: 1,
-                    poster_link: 'https://m.media-amazon.com/images/M/MV5BMjAwNDA5NzEwM15BMl5BanBnXkFtZTgwMTA1MDUyNDE@._V1_UX182_CR0,0,182,268_AL_.jpg',
-                    series_title: 'What We Do in the Shadows',
-                    released_year: '2014',
-                    runtime: '86',
-                    genre: 'Comedy, Horror',
-                    IMDB_Rating: '7.7',
-                    description: 'Viago, Deacon and Vladislav are vampires who are finding that modern life has them struggling with the mundane - like paying rent, keeping up with the chore wheel, trying to get into nightclubs and overcoming flatmate conflicts.',
-                    meta_score: '76',
-                    director: 'Jemaine Clement, Taika Waititi',
-                    stars: ["Jemaine Clement", "Taika Waititi", "Cori Gonzalez-Macuer"],
-                    votes: '160068',
-                    gross: '7253160'
+                    id: movie[0],
+                    poster_link: movie[1],
+                    series_title: movie[2],
+                    released_year: movie[3],
+                    runtime: movie[5],
+                    genre: movie[6],
+                    IMDB_Rating: movie[7],
+                    description: movie[8],
+                    meta_score: movie[9],
+                    director: movie[10],
+                    stars: [movie[11],movie[12],movie[13],movie[14]],
+                    votes: movie[15],
+                    gross: movie[16]
                 },
                 loading: false
-            })
-        }, 1000);
+            });
+        } catch (e) {
+            console.log(e);
+            this.setState({...this.state, loading: false});
+        }
     }
 
     render() {
