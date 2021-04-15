@@ -1,6 +1,8 @@
 import React from 'react';
 import "./style.scss";
 import Loading from "../Utils/Loading";
+import axios from "axios";
+import {API_BASE} from "../../consts";
 
 export default class MovieContent extends React.Component {
     constructor(props) {
@@ -8,7 +10,7 @@ export default class MovieContent extends React.Component {
         this.state = ({
             id: props.match.params.id,
             movie_content: {
-                id: 1,
+                id: window.location.pathname.split("/").slice(-1).pop(),
                 poster_link: '',
                 series_title: '',
                 released_year: '',
@@ -33,14 +35,14 @@ export default class MovieContent extends React.Component {
     async getMovie(id) {
         this.setState({...this.state, loading: true});
 
-        // try {
-        //     this.setState({...this.state, isFetching: true});
-        //     const response = await axios.get("USER_SERVICE_URL" + id);
-        //     this.setState({movies_found: response.data, isFetching: false});
-        // } catch (e) {
-        //     console.log(e);
-        //     this.setState({...this.state, isFetching: false});
-        // }
+        try {
+            this.setState({...this.state, isFetching: true});
+            const response = await axios.post("https://7m0xmfs9v4.execute-api.us-east-1.amazonaws.com/default/movieByID", {id});
+            this.setState({movie_content: response.data, isFetching: false});
+        } catch (e) {
+            console.log(e);
+            this.setState({...this.state, isFetching: false});
+        }
 
         setTimeout(() => {
             this.setState({
