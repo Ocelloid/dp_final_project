@@ -12,17 +12,20 @@ export default class About extends React.Component {
                 {
                     name: "Nikita Grebnev",
                     picture_link: nikita,
-                    description: "Front-end developer specialising on ReactJS, BDAT student at Georgian."
+                    description: "Software engineer specialising front-end applications utilizing ReactJS, Angular, Vue. Currently studying at Georgian College, on BDAT program.",
+                    contact: "Nikita.Grebnev@MyGeorgian.ca",
                 },
                 {
                     name: "Shane Abeysekera",
                     picture_link: default_picture,
-                    description: ""
+                    description: "Software engineer who specializes in AI and Machine learning. Worked as the backend developer for this project. Student at Georgian",
+                    contact: "MahelaLashane.Abeysekera@MyGeorgian.ca",
                 },
                 {
                     name: "Clancy Macwan",
                     picture_link: clancy,
-                    description: "Experienced as a network technician, recently studying BDAT at Georgian College."
+                    description: "Experienced as a network technician, recently studying BDAT at Georgian College.",
+                    contact: "Clancyfrancisbhai.Macwan@mygeorgian.ca",
                 },
             ]
         }
@@ -55,6 +58,9 @@ class AboutUnit extends React.Component {
                 <h2>{person.name}</h2>
                 <span className={"about-description"}>
                     {person.description}
+                </span>
+                <span className={"about-description"}>
+                    Contact: <a href={"mailto:" + person.contact}>{person.contact}</a>
                 </span>
             </div>
         </div>
