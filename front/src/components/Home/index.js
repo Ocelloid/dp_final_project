@@ -4,7 +4,6 @@ import "./style.scss";
 import ChartWrapper from "../Utils/ChartWrapper";
 import Row from "../Utils/Row";
 import Loading from "../Utils/Loading";
-import { API_BASE } from "../../consts";
 import axios from "axios";
 
 export default class Home extends React.Component {
@@ -28,7 +27,7 @@ export default class Home extends React.Component {
         try {
             const response = await axios.get("https://91h6x732qg.execute-api.us-east-1.amazonaws.com/default/rating");
             let state = this.state;
-            state["metaRating"] = eval(response.data['year&meta']).filter(x => x[0] != 0);
+            state["metaRating"] = eval(response.data['year&meta']).filter(x => x[0] !== 0);
             this.setState({state});
         } catch (e) {
             console.log(e);
@@ -83,6 +82,10 @@ export default class Home extends React.Component {
             <h1>Welcome to the XYZ Movie Theater database!</h1>
             <div style={{paddingBottom: 20}}>
                 Here you can find the most relevant information about movies to plan re-runs in your local cinema.
+            </div>
+            <div style={{paddingBottom: 20}}>
+                Our collection consists of a thousand most-rated movies of all time, complete with the information about their genre,
+                directors, stars, domestic gross and scores on websites iMDB and Metacritic, infamous for their unbiast reviews.
             </div>
             <Row>
                 <ChartWrapper>

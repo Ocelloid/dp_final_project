@@ -7,6 +7,14 @@
     display: flex;
     flex-direction: column;
     flex-basis: 70%;
+
+    .dsc_title {
+      font-weight: 700;
+    }
+
+    .dsc_value {
+      color: #252525;
+    }
   }
 
   .poster {
@@ -14,4 +22,8 @@
     flex-direction: column;
     flex-basis: 20%;
   }
+}
+
+.potatoes {
+
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import nikita from "../../assets/nikita.png";
+import clancy from "../../assets/clancy.png";
 import default_picture from "../../assets/default.png";
 import "./style.scss";
 
@@ -19,9 +20,9 @@ export default class About extends React.Component {
                     description: ""
                 },
                 {
-                    name: "Clancy Francisbhai Macwan",
-                    picture_link: default_picture,
-                    description: ""
+                    name: "Clancy Macwan",
+                    picture_link: clancy,
+                    description: "Experienced as a network technician, recently studying BDAT at Georgian College."
                 },
             ]
         }

@@ -2,10 +2,6 @@ import React from 'react';
 import "./style.scss";
 
 export default class ChartWrapper extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let { inRow, chartStyle } = this.props;
         if (!inRow) inRow = 1;
