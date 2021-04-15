@@ -76,13 +76,13 @@ export default class MoviesList extends React.Component {
                 }
             </div>
             <div className={"pagination"}>
-                <button className={"prv"} onClick={() => this.pageChange(this.state.page - 1)} disabled={page === 0}>
+                <button className={"prv"} onClick={() => this.pageChange(this.state.page - 1)} disabled={page === 1}>
                     Previous page
                 </button>
                 <select name={"pages"} id={"pages"} value={page} onChange={event => this.pageChange(event.target.value)}>
                     {options.map((x, i) => <option value={i+1} key={i+1}>{i+1}</option>)}
                 </select>
-                <button className={"nxt"} onClick={() => this.pageChange(this.state.page + 1)} disabled={page === 99}>
+                <button className={"nxt"} onClick={() => this.pageChange(this.state.page + 1)} disabled={page === 100}>
                     Next page
                 </button>
             </div>
