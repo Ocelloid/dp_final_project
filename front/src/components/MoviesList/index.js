@@ -8,7 +8,7 @@ export default class MoviesList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            page: 0,
+            page: 1,
             movies_list: [],
             loading: true,
         }
@@ -58,13 +58,14 @@ export default class MoviesList extends React.Component {
 
         return <div className={"movies-list"}>
             <div className={"pagination"}>
-                <button className={"prv"} onClick={() => this.pageChange(this.state.page - 1)} disabled={page === 0}>
+                <span>Showing {(page-1)*10 + 1} - {(page)*10} out of 1000 movies ordered by their iMDB rating.</span>
+                <button className={"prv"} onClick={() => this.pageChange(this.state.page - 1)} disabled={page === 1}>
                     Previous page
                 </button>
                 <select name={"pages"} id={"pages"} value={page} onChange={event => this.pageChange(event.target.value)}>
-                    {options.map((x, i) => <option value={i} key={i}>{i+1}</option>)}
+                    {options.map((x, i) => <option value={i+1} key={i+1}>{i+1}</option>)}
                 </select>
-                <button className={"nxt"} onClick={() => this.pageChange(this.state.page + 1)} disabled={page === 99}>
+                <button className={"nxt"} onClick={() => this.pageChange(this.state.page + 1)} disabled={page === 100}>
                     Next page
                 </button>
             </div>
@@ -79,7 +80,7 @@ export default class MoviesList extends React.Component {
                     Previous page
                 </button>
                 <select name={"pages"} id={"pages"} value={page} onChange={event => this.pageChange(event.target.value)}>
-                    {options.map((x, i) => <option value={i} key={i}>{i+1}</option>)}
+                    {options.map((x, i) => <option value={i+1} key={i+1}>{i+1}</option>)}
                 </select>
                 <button className={"nxt"} onClick={() => this.pageChange(this.state.page + 1)} disabled={page === 99}>
                     Next page

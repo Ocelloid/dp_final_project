@@ -19,7 +19,7 @@
     flex-direction: column;
     flex-basis: 70%;
     padding: 10px;
-    
+
     .item-title {
       font-weight: 700;
     }
@@ -38,6 +38,16 @@
 .pagination {
   display: flex;
   padding: 10px;
+  .prv, .nxt {
+    border: none;
+    background: transparent;
+    &:focus {
+      outline: none;
+    }
+    &:active {
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+  }
   .prv {
     margin-left: auto;
   }

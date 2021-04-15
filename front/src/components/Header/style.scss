@@ -15,7 +15,7 @@
 }
 
 .title {
-  margin: 0 10px;
+  margin: -4px 10px -10px;
 }
 
 .searchbar {
@@ -55,7 +55,8 @@
       margin-left: -60px;
       background: transparent;
       background-image: url("../../assets/search.png");
-      background-size: contain;
+      background-size: 45px;
+      background-position: center;
       background-repeat: no-repeat;
       border: none;
       opacity: 0.3;

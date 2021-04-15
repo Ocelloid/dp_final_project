@@ -7,6 +7,10 @@
     display: flex;
     flex-direction: column;
     flex-basis: 70%;
+
+    .dsc_title {
+      font-weight: 700;
+    }
   }
 
   .poster {
