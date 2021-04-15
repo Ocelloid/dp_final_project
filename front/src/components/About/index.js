@@ -19,7 +19,7 @@ export default class About extends React.Component {
                     description: ""
                 },
                 {
-                    name: "Clancy Francisbhai Macwanv",
+                    name: "Clancy Francisbhai Macwan",
                     picture_link: default_picture,
                     description: ""
                 },
