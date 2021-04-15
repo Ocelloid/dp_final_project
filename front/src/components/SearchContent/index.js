@@ -1,10 +1,8 @@
 import React from 'react';
 import Loading from "../Utils/Loading";
 import "./style.scss";
-import {Link} from "react-router-dom";
 import axios from 'axios';
 import {MoviesListItem} from "../MoviesList";
-import { API_BASE } from "../../consts";
 
 export default class SearchContent extends React.Component {
     constructor(props) {
@@ -60,7 +58,7 @@ export default class SearchContent extends React.Component {
                     : <p>No entries found for your search!</p>
                 }
                 {!!movies_found.length && <div className={"search-list"}>
-                    {movies_found.map(movie => <MoviesListItem movie={movie}/>)}
+                    {movies_found.map(movie => <MoviesListItem movie={movie} key={movie.id}/>)}
                 </div>}
             </div>}
         </div>;

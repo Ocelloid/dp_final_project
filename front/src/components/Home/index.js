@@ -4,7 +4,6 @@ import "./style.scss";
 import ChartWrapper from "../Utils/ChartWrapper";
 import Row from "../Utils/Row";
 import Loading from "../Utils/Loading";
-import { API_BASE } from "../../consts";
 import axios from "axios";
 
 export default class Home extends React.Component {
@@ -28,7 +27,7 @@ export default class Home extends React.Component {
         try {
             const response = await axios.get("https://91h6x732qg.execute-api.us-east-1.amazonaws.com/default/rating");
             let state = this.state;
-            state["metaRating"] = eval(response.data['year&meta']).filter(x => x[0] != 0);
+            state["metaRating"] = eval(response.data['year&meta']).filter(x => x[0] !== 0);
             this.setState({state});
         } catch (e) {
             console.log(e);

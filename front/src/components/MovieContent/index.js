@@ -2,7 +2,6 @@ import React from 'react';
 import "./style.scss";
 import Loading from "../Utils/Loading";
 import axios from "axios";
-import {API_BASE} from "../../consts";
 
 export default class MovieContent extends React.Component {
     constructor(props) {
