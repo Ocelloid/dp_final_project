@@ -2,17 +2,19 @@ import json
 import os
 import pymysql
 
+
 endpoint = 'DB_URL'
 username = 'USERNAME'
 password = 'PASSWORD'
 db_name = 'movie_db'
+
 
 connection = pymysql.connect(endpoint,user=username,passwd=password, db=db_name)
 
 # get * data from the db
 def lambda_handler(event, context):
     cursor = connection.cursor()
-    cursor.execute('SELECT * from movie_dump_indexes')
+    cursor.execute('SELECT series_title,gross,meta_score FROM movie_dump_indexes')
     rows = cursor.fetchall()
     return{
         'statusCode': 200,
@@ -21,5 +23,6 @@ def lambda_handler(event, context):
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': json.dumps(rows)
+        'title-gross-score': json.dumps(rows)
     }
+        
