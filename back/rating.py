@@ -1,6 +1,7 @@
-import json
+import simplejson as json
 import os
 import pymysql
+
 
 endpoint = 'DB_URL'
 username = 'USERNAME'
@@ -9,17 +10,21 @@ db_name = 'movie_db'
 
 connection = pymysql.connect(endpoint,user=username,passwd=password, db=db_name)
 
-# get * data from the db
+# get specific data from the server
 def lambda_handler(event, context):
+    #movies released by year comparison
+    
     cursor = connection.cursor()
-    cursor.execute('SELECT * from movie_dump_indexes')
+    sql = "SELECT released_year,meta_score FROM movie_dump_indexes GROUP BY meta_score ORDER BY released_year DESC"
+    cursor.execute(sql)
     rows = cursor.fetchall()
-    return{
+    for row in rows:
+        return{
         'statusCode': 200,
         'headers': {
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
         },
-        'body': json.dumps(rows)
-    }
+        'year&meta': json.dumps(rows)
+        }
