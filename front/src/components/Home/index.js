@@ -83,6 +83,10 @@ export default class Home extends React.Component {
             <div style={{paddingBottom: 20}}>
                 Here you can find the most relevant information about movies to plan re-runs in your local cinema.
             </div>
+            <div style={{paddingBottom: 20}}>
+                Our collection consists of a thousand most-rated movies of all time, complete with the information about their genre,
+                directors, stars, domestic gross and scores on websites iMDB and Metacritic, infamous for their unbiast reviews.
+            </div>
             <Row>
                 <ChartWrapper>
                     {yearPercent.length === 0 ? <Loading/> :
